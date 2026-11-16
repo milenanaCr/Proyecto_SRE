@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sre-final-project-mqb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sre-final-project-mqb
+  template:
+    metadata:
+      labels:
+        app: sre-final-project-mqb
+    spec:
+      containers:
+      - name: sre-final-project-mqb
+        image: milenanacr/my-python-sre-app_v2:latest
+        ports:
+        - containerPort: 5001

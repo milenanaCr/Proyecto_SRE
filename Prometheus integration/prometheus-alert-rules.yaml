@@ -1,0 +1,19 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-alert-rules
+  namespace: monitoring
+data:
+  alert-rules.yml: |
+    groups:
+      - name: infrastructure-alerts
+        rules:
+          - alert: PrometheusTargetDown
+            expr: up == 0
+            for: 1m
+            labels:
+              severity: critical
+            annotations:
+              summary: "A monitoring target is down"
+              description: "Prometheus cannot scrape target {{ $labels.job }} ({{ $labels.instance }})."
